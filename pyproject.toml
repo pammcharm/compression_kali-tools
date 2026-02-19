@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel", "pybind11>=2.11"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pamm"
+version = "0.2.0"
+description = "PAMM: Predictive Adaptive Multi-Model compressor"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "PAMM Team" }]
+dependencies = [
+  "cryptography>=42.0.0",
+]
+
+[project.scripts]
+pamm = "pamm.cli:main"
+
+[tool.setuptools]
+packages = ["pamm"]

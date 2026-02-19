@@ -1,0 +1,51 @@
+name: Publish APT Repo
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install build deps
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential python3-dev zlib1g-dev liblzma-dev dpkg-dev gnupg
+          python -m pip install -U pip
+          python -m pip install -e .
+
+      - name: Build .deb
+        run: ./scripts/build_deb.sh
+
+      - name: Import GPG key
+        if: ${{ secrets.PAMM_GPG_PRIVATE_KEY != '' && secrets.PAMM_GPG_KEY_ID != '' }}
+        env:
+          PAMM_GPG_PRIVATE_KEY: ${{ secrets.PAMM_GPG_PRIVATE_KEY }}
+        run: |
+          echo "$PAMM_GPG_PRIVATE_KEY" | gpg --batch --import
+
+      - name: Build APT repo metadata
+        env:
+          PAMM_GPG_KEY_ID: ${{ secrets.PAMM_GPG_KEY_ID }}
+        run: ./scripts/build_apt_repo.sh
+
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./aptrepo
+          publish_branch: gh-pages
+          force_orphan: true
