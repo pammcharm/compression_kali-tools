@@ -1,0 +1,14 @@
+Origin: PAMM
+Label: PAMM
+Suite: stable
+Codename: stable
+Architectures: amd64
+Components: main
+Description: PAMM APT repository
+Date: Mon, 23 Feb 2026 12:18:58 +0000
+MD5Sum:
+ b21eb056ff0f34241cbad112e3e4bfab 634 main/binary-amd64/Packages
+ 7b819ace242d0239b41c661fa61d36aa 456 main/binary-amd64/Packages.gz
+SHA256:
+ 15516fcd854bd6508b8d369852142ef0ae4c70edb07690855b95803f93d3cbee 634 main/binary-amd64/Packages
+ 03abc6a925d74a9bb04b59832719875d2e66324ec521d19266b17d7b9a47e33d 456 main/binary-amd64/Packages.gz
