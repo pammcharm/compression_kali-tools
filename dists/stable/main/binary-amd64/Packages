@@ -1,0 +1,17 @@
+Package: pamm
+Version: 0.2.0
+Architecture: amd64
+Maintainer: PAMM Team
+Depends: python3 (>= 3.13), python3 (<< 3.14), python3-cryptography, zlib1g, liblzma5
+Recommends: bash-completion, zsh
+Filename: pool/main/pamm_0.2.0_amd64.deb
+Size: 77964
+MD5sum: fda04d70087288487d4d47a00efc2fcf
+SHA1: 6cc4a3416265dd3c53287c97c9841cba26dc81b1
+SHA256: fef8d40484a7df405f020cd902dc2e028cbee9ff8d2be4c9369d1abc7c763c8b
+Section: utils
+Priority: optional
+Description: PAMM adaptive compressor CLI
+ PAMM provides .pamm/.pa compression with native backend and encryption.
+ This package is self-contained and does not run apt/pip in maintainer scripts.
+
