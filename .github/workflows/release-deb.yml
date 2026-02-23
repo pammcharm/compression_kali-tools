@@ -1,0 +1,26 @@
+name: Release DEB Asset
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release-deb:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ensure deb exists
+        run: ls -l aptrepo/pool/main/*.deb
+
+      - name: Create release and upload .deb
+        uses: softprops/action-gh-release@v2
+        with:
+          files: aptrepo/pool/main/*.deb
+          generate_release_notes: true
